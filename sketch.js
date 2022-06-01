@@ -69,7 +69,7 @@ function keyPressed() {
 
 function windmill() {
   console.log(pic.width, pic.height);
-  var tmp = new Array(pic.width, pic.height);
+  var tmp = new PImage(pic.width, pic.height);
   tmp.loadPixels();
 
   for (var row = 0; row < tmp.height; row++) {
