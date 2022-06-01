@@ -91,7 +91,10 @@ function windmill() {
 
       var q = refRow * pic.width + refCol;
 
-      tmp.pixels[p] = pic.pixels[q];
+      tmp.pixels[p*4] = pic.pixels[q*4];
+      tmp.pixels[p*4+1] = pic.pixels[q*4+1];
+      tmp.pixels[p*4+2] = pic.pixels[q*4+2];
+      tmp.pixels[p*4+3] = pic.pixels[q*4+3];
     }
   }
 
@@ -103,11 +106,9 @@ function cyberpunk() {
     for (var col = 0; col < pic.width; col++) {
       var p = row * pic.width + col;
 
-      var c = pic.pixels[p];
-
-      var r = red(c);
-      var g = green(c);
-      var b = blue(c);
+      var r = pic.pixels[p*4];
+      var g = pic.pixels[p*4+1];
+      var b = pic.pixels[p*4+2];
 
       var av = (r + g + b) / 3;
       if ((r+g+b)/3 > 90) {
@@ -120,8 +121,11 @@ function cyberpunk() {
         r = av * 0.2;
         g = av * 0.4;
       }
-
-      pic.pixels[p] = color(r, g, b);
+      
+      pic.pixels[p*4] = r;
+      pic.pixels[p*4+1] = g;
+      pic.pixels[p*4+2] = b;
+      pic.pixels[p*4+3] = 1;
     }
   }
 }
@@ -133,7 +137,9 @@ function edgey() {
   for (var row = 0; row < pic.height; row++) {
     for (var col = 0; col < pic.width; col++) {
       var p = row * pic.width + col;
-      var c = pic.pixels[p];
+      var r = pic.pixels[p*4];
+      var g = pic.pixels[p*4+1];
+      var b = pic.pixels[p*4+2];
 
       var nx = max(0, col-2);
       var ny = max(0, row-2);
@@ -149,16 +155,22 @@ function edgey() {
           if (pix == p) continue;
           //skipping itself;
 
-          sum += diff(c, pic.pixels[pix]);
+          sum += diff(color(r, g, b), color(pic.pixels[pix*4], pic.pixels[pix*4+1], pic.pixels[pix*4+2]));
           i++;
         }
       }
       var contrast = sum/i; //average
 
       if (contrast > THRESHHOLD) {
-        tmp.pixels[p] = color(255);
+        tmp.pixels[p*4] = 255;
+        tmp.pixels[p*4+1] = 255;
+        tmp.pixels[p*4+2] = 255;
+        tmp.pixels[p*4+3] = 1;
       } else {
-        tmp.pixels[p] = color(0);
+        tmp.pixels[p*4] = 0;
+        tmp.pixels[p*4+1] = 0;
+        tmp.pixels[p*4+2] = 0;
+        tmp.pixels[p*4+3] = 1;
       }
     }
   }
@@ -180,7 +192,10 @@ function wavy() {
       var p = row * tmp.width + col;
       var q = row * pic.width + int(col + 10 + 10*sin(row*PI/10));
 
-      tmp.pixels[p] = pic.pixels[q];
+      tmp.pixels[p*4] = pic.pixels[q*4];
+      tmp.pixels[p*4+1] = pic.pixels[q*4+1];
+      tmp.pixels[p*4+2] = pic.pixels[q*4+2];
+      tmp.pixels[p*4+3] = pic.pixels[q*4+3];
     }
   }
 
@@ -207,8 +222,12 @@ function fishTunnel() {
       var x2 = int(r * cos(theta)) + Math.floor(pic.width/2);
       var y2 = int(r * sin(theta)) + Math.floor(pic.height/2);
       var q = y2 * pic.width + x2;
-      if (q >= 0)
-        tmp.pixels[p] = pic.pixels[q];
+      if (q >= 0) {
+        tmp.pixels[p*4] = pic.pixels[q*4];
+        tmp.pixels[p*4+1] = pic.pixels[q*4+1];
+        tmp.pixels[p*4+2] = pic.pixels[q*4+2];
+        tmp.pixels[p*4+3] = pic.pixels[q*4+3];
+      }
      
     }
   }
