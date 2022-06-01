@@ -79,14 +79,14 @@ function windmill() {
       var refRow = row;
       var refCol = col;
 
-      if (row <= pic.height/2 && col <= pic.width/2)
-        refCol = col + pic.width/2;
-      if (row <= pic.height/2 && col > pic.width/2)
-        refRow = row + pic.height/2;
-      if (row > pic.height/2 && col <= pic.width/2)
-        refRow = row - pic.height/2;
-      if (row > pic.height/2 && col > pic.width/2)
-        refCol = col - pic.width/2;
+      if (row <= Math.floor(pic.height/2) && col <= Math.floor(pic.width/2))
+        refCol = col + Math.floor(pic.width/2);
+      if (row <= Math.floor(pic.height/2) && col > Math.floor(pic.width/2))
+        refRow = row + Math.floor(pic.height/2);
+      if (row > Math.floor(pic.height/2) && col <= Math.floor(pic.width/2))
+        refRow = row - Math.floor(pic.height/2);
+      if (row > Math.floor(pic.height/2) && col > Math.floor(pic.width/2))
+        refCol = col - Math.floor(pic.width/2);
 
 
       var q = refRow * pic.width + refCol;
@@ -194,8 +194,8 @@ function fishTunnel() {
   for (var y = 0; y < pic.height; y++) {
     for (var x = 0; x < pic.width; x++) {
       var p = y * pic.width + x;
-      var r = sqrt(sq(x-pic.width/2)+sq(y-pic.height/2));
-      var theta = atan2(y-pic.height/2, x-pic.width/2);
+      var r = sqrt(sq(x-Math.floor(pic.width/2))+sq(y-Math.floor(pic.height/2)));
+      var theta = atan2(y-Math.floor(pic.height/2), x-Math.floor(pic.width/2));
       
       r = map(r, 0, 150, 0, 1);
       r = max(0, r);
@@ -204,8 +204,8 @@ function fishTunnel() {
       r += (1 - sqrt(1 - r*r)) / 2;
       r = map(r, 0, 1, 0, 150);
       
-      var x2 = int(r * cos(theta)) + pic.width/2;
-      var y2 = int(r * sin(theta)) + pic.height/2;
+      var x2 = int(r * cos(theta)) + Math.floor(pic.width/2);
+      var y2 = int(r * sin(theta)) + Math.floor(pic.height/2);
       var q = y2 * pic.width + x2;
       if (q >= 0)
         tmp.pixels[p] = pic.pixels[q];
