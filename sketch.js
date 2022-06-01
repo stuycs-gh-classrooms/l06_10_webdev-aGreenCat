@@ -69,7 +69,7 @@ function keyPressed() {
 
 function windmill() {
   console.log(pic.width, pic.height);
-  var tmp = new PImage(pic.width, pic.height);
+  var tmp = createImage(pic.width, pic.height);
   tmp.loadPixels();
 
   for (var row = 0; row < tmp.height; row++) {
@@ -127,7 +127,7 @@ function cyberpunk() {
 }
 
 function edgey() {
-  var tmp = new Array(pic.width, pic.height);
+  var tmp = createImage(pic.width, pic.height);
   tmp.loadPixels();
 
   for (var row = 0; row < pic.height; row++) {
@@ -172,7 +172,7 @@ function diff(c, d) {
 }
 
 function wavy() {
-  var tmp = new Array(pic.width-20, pic.height);
+  var tmp = createImage(pic.width-20, pic.height);
   tmp.loadPixels();
 
   for (var row = 0; row < tmp.height; row++) {
@@ -188,7 +188,7 @@ function wavy() {
 }
 
 function fishTunnel() {
-  var tmp = new Array(pic.width, pic.height);
+  var tmp = createImage(pic.width, pic.height);
   tmp.loadPixels();
 
   for (var y = 0; y < pic.height; y++) {
