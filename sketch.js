@@ -1,8 +1,8 @@
-pic;
-filter;
+var pic;
+var filter;
 
-THRESHHOLD = 55;
-IMG = "lantern.jpg";
+var THRESHHOLD = 55;
+var IMG = "lantern.jpg";
 
 /* 
 KEYS:
@@ -69,15 +69,15 @@ function keyPressed() {
 
 function windmill() {
   println(pic.width, pic.height);
-  tmp = new Array(pic.width, pic.height);
+  var tmp = new PImage(pic.width, pic.height);
   tmp.loadPixels();
 
-  for (row = 0; row < tmp.height; row++) {
-    for (col = 0; col < tmp.width; col++) {
-      p = row * tmp.width + col;
+  for (var row = 0; row < tmp.height; row++) {
+    for (var col = 0; col < tmp.width; col++) {
+      var p = row * tmp.width + col;
 
-      refRow = row;
-      refCol = col;
+      var refRow = row;
+      var refCol = col;
 
       if (row <= pic.height/2 && col <= pic.width/2)
         refCol = col + pic.width/2;
@@ -89,7 +89,7 @@ function windmill() {
         refCol = col - pic.width/2;
 
 
-      q = refRow * pic.width + refCol;
+      var q = refRow * pic.width + refCol;
 
       tmp.pixels[p] = pic.pixels[q];
     }
@@ -99,17 +99,17 @@ function windmill() {
 }
 
 function cyberpunk() {
-  for (row = 0; row < pic.height; row++) {
-    for (col = 0; col < pic.width; col++) {
-      p = row * pic.width + col;
+  for (var row = 0; row < pic.height; row++) {
+    for (var col = 0; col < pic.width; col++) {
+      var p = row * pic.width + col;
 
-      c = pic.pixels[p];
+      var c = pic.pixels[p];
 
-      r = red(c);
-      g = green(c);
-      b = blue(c);
+      var r = red(c);
+      var g = green(c);
+      var b = blue(c);
 
-      av = (r + g + b) / 3;
+      var av = (r + g + b) / 3;
       if ((r+g+b)/3 > 90) {
         r = av;
         b = av;
@@ -127,25 +127,25 @@ function cyberpunk() {
 }
 
 function edgey() {
-  tmp = new Array(pic.width, pic.height);
+  var tmp = new PImage(pic.width, pic.height);
   tmp.loadPixels();
 
-  for (row = 0; row < pic.height; row++) {
-    for (col = 0; col < pic.width; col++) {
-      p = row * pic.width + col;
-      c = pic.pixels[p];
+  for (var row = 0; row < pic.height; row++) {
+    for (var col = 0; col < pic.width; col++) {
+      var p = row * pic.width + col;
+      var c = pic.pixels[p];
 
-      nx = max(0, col-2);
-      ny = max(0, row-2);
-      nx2 = min(pic.width-1, col+2);
-      ny2 = min(pic.height-1, row+2);
+      var nx = max(0, col-2);
+      var ny = max(0, row-2);
+      var nx2 = min(pic.width-1, col+2);
+      var ny2 = min(pic.height-1, row+2);
       //define upper left and lower right corners of neighborhood.
 
-      sum = 0;
-      i = 0;
-      for (ro = ny; ro <= ny2; ro++) {
-        for (co = nx; co <= nx2; co++) {
-          pix = ro * pic.width + co;
+      var sum = 0;
+      var i = 0;
+      for (var ro = ny; ro <= ny2; ro++) {
+        for (var co = nx; co <= nx2; co++) {
+          var pix = ro * pic.width + co;
           if (pix == p) continue;
           //skipping itself;
 
@@ -153,7 +153,7 @@ function edgey() {
           i++;
         }
       }
-      contrast = sum/i; //average
+      var contrast = sum/i; //average
 
       if (contrast > THRESHHOLD) {
         tmp.pixels[p] = color(255);
@@ -172,13 +172,13 @@ function diff(c, d) {
 }
 
 function wavy() {
-  tmp = new Array(pic.width-20, pic.height);
+  var tmp = new PImage(pic.width-20, pic.height);
   tmp.loadPixels();
 
-  for (row = 0; row < tmp.height; row++) {
-    for (col = 0; col < tmp.width; col++) {
-      p = row * tmp.width + col;
-      q = row * pic.width + int(col + 10 + 10*sin(row*PI/10));
+  for (var row = 0; row < tmp.height; row++) {
+    for (var col = 0; col < tmp.width; col++) {
+      var p = row * tmp.width + col;
+      var q = row * pic.width + int(col + 10 + 10*sin(row*PI/10));
 
       tmp.pixels[p] = pic.pixels[q];
     }
@@ -188,14 +188,14 @@ function wavy() {
 }
 
 function fishTunnel() {
-  tmp = new Array(pic.width, pic.height);
+  var tmp = new PImage(pic.width, pic.height);
   tmp.loadPixels();
 
-  for (y = 0; y < pic.height; y++) {
-    for (x = 0; x < pic.width; x++) {
-      p = y * pic.width + x;
-      r = sqrt(sq(x-pic.width/2)+sq(y-pic.height/2));
-      theta = atan2(y-pic.height/2, x-pic.width/2);
+  for (var y = 0; y < pic.height; y++) {
+    for (var x = 0; x < pic.width; x++) {
+      var p = y * pic.width + x;
+      var r = sqrt(sq(x-pic.width/2)+sq(y-pic.height/2));
+      var theta = atan2(y-pic.height/2, x-pic.width/2);
       
       r = map(r, 0, 150, 0, 1);
       r = max(0, r);
@@ -204,9 +204,9 @@ function fishTunnel() {
       r += (1 - sqrt(1 - r*r)) / 2;
       r = map(r, 0, 1, 0, 150);
       
-      x2 = int(r * cos(theta)) + pic.width/2;
-      y2 = int(r * sin(theta)) + pic.height/2;
-      q = y2 * pic.width + x2;
+      var x2 = int(r * cos(theta)) + pic.width/2;
+      var y2 = int(r * sin(theta)) + pic.height/2;
+      var q = y2 * pic.width + x2;
       if (q >= 0)
         tmp.pixels[p] = pic.pixels[q];
      
