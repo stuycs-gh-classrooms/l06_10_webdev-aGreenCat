@@ -2,7 +2,7 @@ var pic;
 var filter;
 
 var THRESHHOLD = 55;
-var IMG;
+var IMG = "lantern.jpg";
 
 /* 
 KEYS:
@@ -20,7 +20,6 @@ KEYS:
 function setup() {
   createCanvas(1200, 800);
 
-  IMG = "lantern.jpg";
   pic = loadImage(IMG);
   pic.loadPixels();
 }
