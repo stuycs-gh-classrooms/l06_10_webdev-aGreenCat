@@ -166,7 +166,7 @@ function edgey() {
   pic = tmp;
 }
 
-diff(c, d) {
+function diff(c, d) {
   //Find red, green and blue differences, and average them.
   return abs(red(c)-red(d)) + abs(green(c)-green(d)) + abs(blue(c)-blue(d));
 }
