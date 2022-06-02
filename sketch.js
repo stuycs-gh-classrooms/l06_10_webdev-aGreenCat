@@ -26,6 +26,7 @@ function preload() {
 
 function setup() {
   createCanvas(1200, 800);
+  noLoop();
 }
 
 function draw() {
