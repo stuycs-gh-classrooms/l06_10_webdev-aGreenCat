@@ -17,7 +17,7 @@ KEYS:
 
 */
 
-function setup() {
+function preload() {
   createCanvas(1200, 800);
 
   pic = loadImage(IMG);
