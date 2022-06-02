@@ -18,13 +18,12 @@ KEYS:
 */
 
 function preload() {
-  createCanvas(1200, 800);
-
   pic = loadImage(IMG);
   pic.loadPixels();
 }
 
 function setup() {
+  createCanvas(1200, 800);
   noLoop();
 }
 
