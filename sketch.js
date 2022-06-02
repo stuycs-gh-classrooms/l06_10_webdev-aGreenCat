@@ -38,6 +38,7 @@ function keyPressed() {
   if (key == 'r') {
     pic = loadImage(IMG, pic => {
       pic.loadPixels();
+      redraw()
     });
   }
   if (key == 'p') {
@@ -50,6 +51,7 @@ function keyPressed() {
 
     pic = loadImage(IMG, pic => {
       pic.loadPixels();
+      redraw()
     });
   }
   if (key == 'z') {
