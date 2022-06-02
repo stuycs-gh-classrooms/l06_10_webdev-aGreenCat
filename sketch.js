@@ -24,6 +24,10 @@ function preload() {
   pic.loadPixels();
 }
 
+function setup() {
+  noLoop();
+}
+
 function draw() {
   background(200);
   image(pic, (width-pic.width)/2, (height-pic.height)/2);
@@ -65,6 +69,7 @@ function keyPressed() {
     fishTunnel();
     pic.updatePixels();
   }
+  redraw()
 }
 
 function windmill() {
