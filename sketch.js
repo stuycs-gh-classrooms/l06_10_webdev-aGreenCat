@@ -4,24 +4,28 @@ var filter;
 var THRESHHOLD = 55;
 var IMG = "lantern.jpg";
 
-/* 
-KEYS:
-  R - reset the current image.
-  P - Switch images.
-  
-  Z - windmill
-  X - cyberpunk
-  C - edge detection
-  V - waves
-  B - fisheye tunnel
+/*
+ KEYS:
+ R - reset the current image.
+ P - Switch images.
+ 
+ Z - windmill
+ X - cyberpunk
+ C - edge detection
+ V - waves
+ B - fisheye tunnel
+ 
+ */
 
-*/
+function preload() {
+  pic = loadImage(IMG, pic => {
+    pic.loadPixels();
+  }
+  );
+}
 
 function setup() {
   createCanvas(1200, 800);
-
-  pic = loadImage(IMG);
-  pic.loadPixels();
 }
 
 function draw() {
@@ -31,9 +35,10 @@ function draw() {
 
 function keyPressed() {
   if (key == 'r') {
-    pic = loadImage(IMG);
-    pic.loadPixels();
-  } 
+    pic = loadImage(IMG, pic => {
+      pic.loadPixels();
+    });
+  }
   if (key == 'p') {
     if (IMG == "lantern.jpg")
       IMG = "nyc.jpeg";
@@ -42,8 +47,9 @@ function keyPressed() {
     else
       IMG = "lantern.jpg";
 
-    pic = loadImage(IMG);
-    pic.loadPixels();
+    pic = loadImage(IMG, pic => {
+      pic.loadPixels();
+    });
   }
   if (key == 'z') {
     windmill();
@@ -65,10 +71,10 @@ function keyPressed() {
     fishTunnel();
     pic.updatePixels();
   }
+  redraw()
 }
 
 function windmill() {
-  console.log(pic.width, pic.height);
   var tmp = createImage(pic.width, pic.height);
   tmp.loadPixels();
 
@@ -121,11 +127,10 @@ function cyberpunk() {
         r = av * 0.2;
         g = av * 0.4;
       }
-      
       pic.pixels[p*4] = r;
       pic.pixels[p*4+1] = g;
       pic.pixels[p*4+2] = b;
-      pic.pixels[p*4+3] = 1;
+      pic.pixels[p*4+3] = 255;
     }
   }
 }
@@ -165,12 +170,12 @@ function edgey() {
         tmp.pixels[p*4] = 255;
         tmp.pixels[p*4+1] = 255;
         tmp.pixels[p*4+2] = 255;
-        tmp.pixels[p*4+3] = 1;
+        tmp.pixels[p*4+3] = 255;
       } else {
         tmp.pixels[p*4] = 0;
         tmp.pixels[p*4+1] = 0;
         tmp.pixels[p*4+2] = 0;
-        tmp.pixels[p*4+3] = 1;
+        tmp.pixels[p*4+3] = 255;
       }
     }
   }
@@ -211,14 +216,14 @@ function fishTunnel() {
       var p = y * pic.width + x;
       var r = sqrt(sq(x-Math.floor(pic.width/2))+sq(y-Math.floor(pic.height/2)));
       var theta = atan2(y-Math.floor(pic.height/2), x-Math.floor(pic.width/2));
-      
+
       r = map(r, 0, 150, 0, 1);
       r = max(0, r);
       r = min(1, r);
-      
+
       r += (1 - sqrt(1 - r*r)) / 2;
       r = map(r, 0, 1, 0, 150);
-      
+
       var x2 = int(r * cos(theta)) + Math.floor(pic.width/2);
       var y2 = int(r * sin(theta)) + Math.floor(pic.height/2);
       var q = y2 * pic.width + x2;
@@ -228,7 +233,6 @@ function fishTunnel() {
         tmp.pixels[p*4+2] = pic.pixels[q*4+2];
         tmp.pixels[p*4+3] = pic.pixels[q*4+3];
       }
-     
     }
   }
 
