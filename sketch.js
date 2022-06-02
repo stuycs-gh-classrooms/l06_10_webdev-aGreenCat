@@ -22,11 +22,14 @@ function setup() {
 
   pic = loadImage(IMG);
   pic.loadPixels();
+
+  console.log(pic.pixels[0], pic.pixels[1], pic.pixels[2], pic.pixels[3])
 }
 
 function draw() {
   background(200);
   image(pic, (width-pic.width)/2, (height-pic.height)/2);
+  console.log(pic.pixels[0], pic.pixels[1], pic.pixels[2], pic.pixels[3])
 }
 
 function keyPressed() {
@@ -121,7 +124,6 @@ function cyberpunk() {
         r = av * 0.2;
         g = av * 0.4;
       }
-      
       pic.pixels[p*4] = r;
       pic.pixels[p*4+1] = g;
       pic.pixels[p*4+2] = b;
