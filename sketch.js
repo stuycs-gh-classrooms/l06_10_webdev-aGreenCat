@@ -22,14 +22,11 @@ function setup() {
 
   pic = loadImage(IMG);
   pic.loadPixels();
-
-  console.log(pic.pixels[0], pic.pixels[1], pic.pixels[2], pic.pixels[3])
 }
 
 function draw() {
   background(200);
   image(pic, (width-pic.width)/2, (height-pic.height)/2);
-  console.log(pic.pixels[0], pic.pixels[1], pic.pixels[2], pic.pixels[3])
 }
 
 function keyPressed() {
@@ -71,7 +68,6 @@ function keyPressed() {
 }
 
 function windmill() {
-  console.log(pic.width, pic.height);
   var tmp = createImage(pic.width, pic.height);
   tmp.loadPixels();
 
@@ -127,7 +123,7 @@ function cyberpunk() {
       pic.pixels[p*4] = r;
       pic.pixels[p*4+1] = g;
       pic.pixels[p*4+2] = b;
-      pic.pixels[p*4+3] = 1;
+      pic.pixels[p*4+3] = 255;
     }
   }
 }
@@ -167,12 +163,12 @@ function edgey() {
         tmp.pixels[p*4] = 255;
         tmp.pixels[p*4+1] = 255;
         tmp.pixels[p*4+2] = 255;
-        tmp.pixels[p*4+3] = 1;
+        tmp.pixels[p*4+3] = 255;
       } else {
         tmp.pixels[p*4] = 0;
         tmp.pixels[p*4+1] = 0;
         tmp.pixels[p*4+2] = 0;
-        tmp.pixels[p*4+3] = 1;
+        tmp.pixels[p*4+3] = 255;
       }
     }
   }
