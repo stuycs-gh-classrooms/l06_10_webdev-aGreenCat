@@ -23,7 +23,7 @@
       text-align: center;
     }
     .side {
-      margin-right: 60px;
+      margin: 60px;
     }
   </style>
 </head>
@@ -44,6 +44,15 @@
     </ul>
     
     <p>*Please allow edge detection a few seconds to take effect.</p>
+    
+    <h4>Lessons learned:</h4>
+    
+    <ol>
+      <li>The pixels array of images in p5.js is not the same as that of Processing for java. In p5.js, the array is actually a one dimensional array with every 4 elements representing the RGBA values. The latter has one element corresponding to one color.</li>
+      <li>A is from 0-255, not 0.0-1.0.</li>
+      <li>loop(), noLoop(), redraw() exists. Both in p5.js and Processing for java. (Technically not really necessary but I found it because at some point I doubted my draw function was even running)</li>
+      <li>The loadImage() function takes time to complete, we cannot call loadPixels() right after, but instead in a callback.</li>
+    </ol>
   </div>
 
   <main></main>
